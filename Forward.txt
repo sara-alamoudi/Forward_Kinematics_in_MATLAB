@@ -1,0 +1,37 @@
+a = input('Enter the value of the first Angle(degree):');
+b = input('Enter the value of the second Angle(degree):');
+%Let assume values for the length of the robotic arm;
+L1 = 4;
+L2 = 6;
+%assume the initial position
+x1 = 4*cosd(30);
+y1 = 4*sind(30);
+x2 = 6*cosd(55+30)+x1;
+y2 = 6*sind(55+30)+y1;
+x0 = 0;
+y0 = 0;
+plot([x0 x1],[y0 y1],'b-','LineWidth',2);
+xlabel('x-axis','FontSize',12);
+ylabel('y-axis','FontSize',12);
+title('Forward Kinematics','FontSize',12);
+hold on;
+plot([x1 x2],[y1 y2],'b-','LineWidth',2);
+axis([-10 10 -10 10])
+grid on
+%Input (Calculate the End-Effector);
+
+for i = linspace(0,a,1)
+    for j = linspace(0,b,1)
+X1 = 4*cosd(i);
+Y1 = 4*sind(i);
+X2 = 6*cosd(i+j)+X1;
+Y2 = 6*sind(i+j)+Y1;
+plot([0 X1],[0 Y1],'m-','LineWidth',2);
+hold on;
+plot([X1 X2],[Y1 Y2],'m-','LineWidth',2);
+legend('','Blue for the initail position','Megenta based on the input','','Location','Best');
+pause(0.1);
+    end
+end
+disp(['The Value of the x-component:' num2str(X2)]);
+disp(['The Value of the y-component:' num2str(Y2)]);
